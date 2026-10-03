@@ -1,93 +1,86 @@
-# Retail Sales Analytics — SQL Server, Excel & Power BI
-
-End-to-end data analytics project built on the Kaggle **Sample Superstore** dataset (9,994 retail orders, 2014–2017), covering the full pipeline from relational database querying to business intelligence dashboarding.
+# Retail Sales Analytics
 
 ## Project Overview
 
-This project analyzes retail sales performance across regions, product categories, and customer segments using a three-stage pipeline:
+An end-to-end retail sales analytics portfolio project using the Sample Superstore dataset.
 
-1. **SQL Server** — data modeling, aggregation, and analytical querying
-2. **Excel** — data validation, pivot table analysis, and charting
-3. **Power BI** — interactive multi-page dashboard with DAX measures
-
-The goal was to identify profitability drivers and operational inefficiencies in the business — specifically, which regions/categories drive profit, how discounting affects margins, and how shipping performance varies by mode.
+The project analyzes sales, profit, customers, products, discounts, regions, and shipping performance to identify patterns and business insights.
 
 ## Dataset
 
-- **Source:** [Sample Superstore dataset](https://www.kaggle.com/datasets) (Kaggle)
-- **Size:** 9,994 rows × 21 columns
-- **Fields:** Order/Ship dates, Ship Mode, Customer info, Geography (Region/State/City), Category/Sub-Category, Product, Sales, Quantity, Discount, Profit
+**Dataset:** Sample Superstore
+**Rows:** 9,994
+**Columns:** 21
+**Source:** Kaggle Sample Superstore dataset
 
-## Tech Stack
+The dataset contains information about:
 
-| Layer | Tool | Purpose |
-|---|---|---|
-| Database | SQL Server Express + SSMS | Data storage, querying, view creation |
-| Spreadsheet | Microsoft Excel | Data validation, pivot tables, charts |
-| BI / Visualization | Power BI Desktop | DAX measures, interactive dashboard |
+* Orders and shipping dates
+* Customers
+* Regions, states, and cities
+* Product categories and sub-categories
+* Sales
+* Quantity
+* Discounts
+* Profit
 
-## SQL Work
+## Tools Used
 
-Implemented in SSMS against a `SuperstoreDB` database:
+* **Python** — data cleaning and exploratory analysis
+* **Pandas** — data manipulation and analysis
+* **Excel** — spreadsheet analysis and reporting
+* **SQL** — business queries and aggregations
+* **Power BI** — interactive data visualization
+* **Git & GitHub** — version control and portfolio publishing
 
-- Table creation and bulk import of the raw dataset (9,994 rows)
-- Aggregation queries: regional sales/profit performance, category-wise profit margins, monthly sales trend
-- **Window function**: `RANK()` to identify top 10 customers by sales
-- **CTE**: discount-band analysis showing the relationship between discount depth and profitability
-- **Date functions**: shipping mode efficiency via `DATEDIFF` on order/ship dates
-- **View**: `vw_SalesSummary` — a cleaned, derived view (adds a calculated `DeliveryDays` column) used as the single source feeding the Power BI dashboard
+## Analysis Questions
 
-Key finding from SQL analysis: orders with discounts above ~20% show sharply lower (often negative) average profit per order, while several sub-categories (e.g. Tables, Bookcases) are consistently unprofitable despite healthy sales volume.
+This project investigates questions such as:
 
-## Excel Work
+1. Which regions generate the most sales and profit?
+2. Which product categories and sub-categories are most profitable?
+3. Which products generate losses?
+4. How do discounts affect profitability?
+5. Which customers generate the most revenue?
+6. How does sales performance change over time?
+7. How does shipping mode affect delivery time?
 
-- Imported and validated the raw CSV (date type checks, duplicate check)
-- Added a calculated `Profit Margin` column
-- Built two pivot tables: Region × Category sales/profit matrix, and Sub-Category profit ranking
-- Horizontal bar chart visualizing profit by sub-category
+## Project Structure
 
-## Power BI Dashboard
-
-Connects directly to the `vw_SalesSummary` SQL Server view (Import mode). Three pages:
-
-1. **Executive Overview** — KPI cards (Total Sales, Total Profit, Profit Margin %, Total Orders), monthly sales trend line, regional sales/profit clustered bar, category sales donut, region slicer
-2. **Product & Profitability Deep Dive** — sub-category profit ranking, discount-vs-profit scatter plot, top 10 customers table, category slicer
-3. **Operations / Shipping** — average delivery days by ship mode, top states by sales, delivery KPI card
-
-**DAX measures used:**
-```dax
-Total Sales = SUM(vw_SalesSummary[Sales])
-Total Profit = SUM(vw_SalesSummary[Profit])
-Profit Margin % = DIVIDE([Total Profit], [Total Sales], 0)
-Total Orders = DISTINCTCOUNT(vw_SalesSummary[Order ID])
-Avg Delivery Days = AVERAGE(vw_SalesSummary[DeliveryDays])
+```text
+Retail-Sales-Analytics/
+│
+├── DataSet.csv
+├── Excel Analysis.xlsx
+├── Data Visualization(Power bi).pbix
+├── sql query/
+├── SQL query results/
+└── README.md
 ```
 
-## Repository Structure
+## Data Analysis
 
-```
-retail-sales-analytics-sql-powerbi/
-├── README.md
-├── data/
-│   └── Sample_Superstore.csv
-├── sql/
-│   └── queries.sql
-├── excel/
-│   └── Superstore_Analysis.xlsx
-└── powerbi/
-    └── Superstore_Dashboard.pbix
-```
+The analysis will include:
+
+* Data quality checks
+* Sales and profit analysis
+* Regional performance
+* Category and sub-category analysis
+* Customer analysis
+* Discount and profitability analysis
+* Time-series sales analysis
+* Shipping analysis
 
 ## Key Insights
 
-- Discounts beyond ~20% are associated with sharply reduced or negative profit per order
-- Furniture sub-categories (Tables, Bookcases) generate substantial sales but erode overall profit margin
-- The West and East regions outperform South and Central in both sales volume and profit margin
-- Standard Class shipping accounts for the majority of orders with the longest average delivery time
+Insights will be documented after completing the analysis.
 
-## Authors
+## Author
 
-- Srajan Sijariya
-- Pratyush Sahu
+**Elvis Elosindu**
 
-**Department:** B.Tech Mechanical Engineering, IIT Ropar
+Data Analytics Portfolio Project
+
+---
+
+*Dataset source: Sample Superstore dataset available through Kaggle.*
